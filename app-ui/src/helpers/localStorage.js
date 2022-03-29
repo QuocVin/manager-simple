@@ -12,7 +12,7 @@ export function setAuthLS(key, value) {
     localStorage.setItem(key, value);
 }
 export function clearAuthLS() {
-    [LS_KEY.AUTH_TOKEN].forEach((key) => {
+    [LS_KEY.R0LE].forEach((key) => {
         localStorage.removeItem(key);
     });
 }

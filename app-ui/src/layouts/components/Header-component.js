@@ -83,7 +83,7 @@ export default function ({ classes, open, setOpen, mainRef }) {
                 <div className="block-left">
                     <Button>
                         <Typography variant="h5" noWrap className="logo-text">
-                            USER INFO
+                            USER HOME
                         </Typography>
                     </Button>
                 </div >
