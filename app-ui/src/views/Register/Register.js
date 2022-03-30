@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Button,
     CssBaseline,
@@ -29,10 +29,15 @@ import { useHistory } from 'react-router';
 import { FIELDS_REGISTER, endpoints, API, ROLE } from '../../common';
 import { RoutesApp } from '../../routes/route'
 import DateFnsUtils from '@date-io/date-fns';
+import moment from 'moment';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+
+function parse2Str(date = new Date(), format = "YYYY-MM-DD HH:mm:ss.SSS") {
+    return moment(date).utcOffset("+07:00").format(format);
+};
 
 export default function Register() {
     const classes = useStyles();
@@ -49,8 +54,7 @@ export default function Register() {
 
     const [acc, setAcc] = useState({
         gen: 'M',
-        date_ob: new Date(),
-        created_date: new Date(),
+        date_ob: parse2Str(new Date()),
         role_name: ROLE.REGISTER
     });
 
@@ -58,7 +62,7 @@ export default function Register() {
         if (event.toString().includes("GMT+")) {
             setAcc({
                 ...acc,
-                date_ob: event
+                date_ob: parse2Str(event)
             })
         } else {
             event.persist();

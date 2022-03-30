@@ -3,8 +3,6 @@ import axios from 'axios';
 export const endpoints = {
     'login':                    '/api/authenticate',
     'register':                 '/api/users/createUser',
-    'update-user':              '/api/users/update',
-    'user-list':                '/api/users/getAll',
     'user-info': (userId) =>    `/api/users/detail?id=${userId}`,
     'user-update':              '/api/users/update',
     'user-chart':               '/api/users/chartRole',

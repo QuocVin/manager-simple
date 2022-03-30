@@ -20,14 +20,19 @@ import {
 import { useStyles } from "./UserProfile-styles";
 import DateFnsUtils from '@date-io/date-fns';
 import { useHistory, useLocation } from 'react-router';
-import { FIELDS_UPDATE_USER, FIELDS_REGISTER, endpoints, API } from '../../common';
+import { FIELDS_UPDATE_USER, FIELDS_REGISTER, endpoints, API, ROLE } from '../../common';
 import { RoutesApp } from '../../routes/route'
 import cookies from 'react-cookies';
 import { useStore } from "react-redux";
+import moment from 'moment';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+
+function parse2Str(date = new Date(), format = "YYYY-MM-DD HH:mm:ss.SSS") {
+    return moment(date).utcOffset("+07:00").format(format);
+};
 
 export default function UserProfile() {
     const classes = useStyles();
@@ -49,10 +54,6 @@ export default function UserProfile() {
     };
 
     useEffect(() => {
-        // async function init() {
-        //     await fetchUser()
-        // }
-        // init()
         checkCreate()
     }, [])
 
@@ -60,9 +61,10 @@ export default function UserProfile() {
         if (state?.create) {
             setCreateView(true)
             setUserInfo({
-                role_name: "REGISTER"
+                gen: 'F',
+                date_ob: parse2Str(new Date()),
+                role_name: ROLE.REGISTER
             })
-            console.info('userInfo', userInfo)
         } else {
             fetchUser()
         }
@@ -119,7 +121,7 @@ export default function UserProfile() {
         if (event.toString().includes("GMT+")) {
             setUserInfo({
                 ...userInfo,
-                date_ob: event
+                date_ob: parse2Str(event)
             })
         } else {
             event.persist();
@@ -138,7 +140,7 @@ export default function UserProfile() {
         if (event.toString().includes("GMT+")) {
             setUserInfo({
                 ...userInfo,
-                date_ob: event
+                date_ob: parse2Str(event)
             })
         } else {
             event.persist();
@@ -170,11 +172,10 @@ export default function UserProfile() {
                 <Typography variant="h3" className={classes.title}>Thông tin người dùng: {title}</Typography>
             )}
             <Container maxWidth="xs">
-                {/* thông tin người dùng */}
-                <form className={classes.form}>
-                    {loading ? <p>loading . . .</p> :
+                {loading ? <p>loading . . .</p> :
+                    <form className={classes.form}>
                         <>
-                            {createNew ? (
+                            {createView ? (
                                 <div>
                                     {FIELDS_REGISTER.map((f) => {
                                         return (
@@ -182,11 +183,12 @@ export default function UserProfile() {
                                                 variant="outlined"
                                                 fullWidth
                                                 margin='normal'
-                                                key={f.id + ' register'}
+                                                key={f.id + ' register1'}
                                                 id={f.id}
                                                 name={f.id}
                                                 label={f.label}
                                                 value={userInfo[f.id]}
+                                                type={f.type ? f.type : 'text'}
                                                 onChange={newAcc}
                                                 InputLabelProps={{
                                                     shrink: true,
@@ -203,7 +205,7 @@ export default function UserProfile() {
                                                 variant="outlined"
                                                 fullWidth
                                                 margin='normal'
-                                                key={f.id + ' register'}
+                                                key={f.id + ' up-info'}
                                                 id={f.id}
                                                 name={f.id}
                                                 label={f.label}
@@ -221,7 +223,7 @@ export default function UserProfile() {
                             <div>
                                 <FormControl component="fieldset" className={classes.radio}>
                                     <FormLabel component="legend">Giới tính</FormLabel>
-                                    <RadioGroup row aria-label="gen" name="gen" value={userInfo?.gen ? userInfo?.gen : "F"} onChange={accInfo}>
+                                    <RadioGroup row aria-label="gen" name="gen" value={userInfo?.gen ? userInfo?.gen : 'F'} onChange={accInfo}>
                                         <FormControlLabel value="F" control={<Radio />} label="Nữ" />
                                         <FormControlLabel value="M" control={<Radio />} label="Nam" />
                                     </RadioGroup>
@@ -246,46 +248,45 @@ export default function UserProfile() {
                                 </div>
                             </div>
                         </>
-                    }
 
-                    {/* nút xử lý quay về hoặc thực hiện cập nhập */}
-                    <Grid container spacing={5}>
-                        <Grid item xs={4}>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                // color="primary"
-                                className={classes.submit}
-                                onClick={handleBack}
-                            >
-                                Quay về
-                            </Button>
-                        </Grid>
-                        <Grid item xs={8}>
-                            {createView ? (
+                        <Grid container spacing={5}>
+                            <Grid item xs={4}>
                                 <Button
-                                    onClick={() => createNew()}
                                     fullWidth
                                     variant="contained"
-                                    color="primary"
+                                    // color="primary"
                                     className={classes.submit}
+                                    onClick={handleBack}
                                 >
-                                    Tạo mới
+                                    Quay về
                                 </Button>
-                            ) : (
-                                <Button
-                                    onClick={() => updateInfo()}
-                                    fullWidth
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.submit}
-                                >
-                                    Cập nhật
-                                </Button>
-                            )}
+                            </Grid>
+                            <Grid item xs={8}>
+                                {createView ? (
+                                    <Button
+                                        onClick={() => createNew()}
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.submit}
+                                    >
+                                        Tạo mới
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        onClick={() => updateInfo()}
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.submit}
+                                    >
+                                        Cập nhật
+                                    </Button>
+                                )}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </form>
+                    </form>
+                }
             </Container>
             <Snackbar open={alertUp} autoHideDuration={6000} onClose={handleCloseAlert}>
                 <Alert onClose={handleCloseAlert} severity={error ? "warning" : "success"}>{alertText}</Alert>

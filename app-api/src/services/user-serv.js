@@ -38,7 +38,7 @@ async function getUserByAuth(username, password) {
   };
 };
 
-async function createUser(params, others) {
+async function createUser(params) {
   if (_.isEmpty(params)) {
     return []
   }
@@ -50,7 +50,7 @@ async function createUser(params, others) {
     }
   });
 
-  await basicServ.insert("users", prs, others)
+  await basicServ.insert("users", prs)
   return prs
 }
 
@@ -59,8 +59,9 @@ async function chartRole() {
   try {
     const sql = `
     SELECT COUNT(id) as sl
-    FROM [users]
+    FROM users
     GROUP BY role_name
+    ORDER BY role_name
   `;
     const ret = await db.query(sql, { type: QueryTypes.SELECT });
 
@@ -90,8 +91,8 @@ async function searchName(params) {
   try {
     const sql = `
     SELECT *
-    FROM [users]
-    WHERE name like '%${prs[0].name}%' AND role_name <> 'ADMIN'
+    FROM users
+    WHERE name like '%${prs[0].name}%' AND role_name != 'ADMIN'
     ORDER BY name
   `;
     const ret = await db.query(sql, { type: QueryTypes.SELECT });

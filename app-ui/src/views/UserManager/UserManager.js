@@ -41,7 +41,7 @@ export default function UserManager() {
                 setUserList(
                     res?.data?.data?.data.map((r, idx) =>
                         createData(idx + 1, r.name, r.username, moment(r.date_ob).format("DD-MM-YYYY").toString()
-                            , r.gen, r.role_name, moment(r.date_create).format("DD-MM-YYYY").toString(), r.id)
+                            , r.gen, r.role_name, moment(r.created_date).format("DD-MM-YYYY").toString(), r.id)
                     )
                 );
                 setLoading(false)

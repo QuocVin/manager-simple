@@ -2,18 +2,8 @@ const { basicAcs } = require("../database");
 const { bcryptUtil } = require("../utils");
 const { getColumns } = require("./_helper");
 
-exports.allRecords = async (tableName, params) => {
-  const ret = await basicAcs.allRecords(tableName, params);
-
-  if (!ret.OK) {
-    throw ret.error;
-  }
-
-  return ret.data;
-};
-
 exports.getAll = async (tableName, params) => {
-  const acRet1 = await basicAcs.getAll(tableName, params);
+  const acRet1 = await basicAcs.getAll(tableName);
 
   if (!acRet1.OK) {
     throw acRet1.error;
@@ -32,7 +22,7 @@ exports.detail = async (tableName, params) => {
   throw acRet.error;
 };
 
-exports.insert = async (tableName, params, others, t) => {
+exports.insert = async (tableName, params) => {
   const columns = getColumns(tableName);
   let preData;
   if (tableName === "users") {
@@ -51,12 +41,7 @@ exports.insert = async (tableName, params, others, t) => {
     preData = params;
   }
 
-  const acRet = await basicAcs.insert(
-    tableName,
-    { columns, rows: preData },
-    others,
-    t
-  );
+  const acRet = await basicAcs.insert(tableName, { columns, rows: preData },);
   if (!acRet.OK) {
     throw acRet.error;
   }
@@ -64,7 +49,7 @@ exports.insert = async (tableName, params, others, t) => {
   return acRet.data;
 };
 
-exports.update = async (tableName, params, others) => {
+exports.update = async (tableName, params) => {
   const dataSafe = Array.isArray(params) ? params : [params];
   const preData = [];
   dataSafe.forEach((data, idx) => {
@@ -72,7 +57,7 @@ exports.update = async (tableName, params, others) => {
       row: data,
     };
   });
-  const acRet = await basicAcs.update(tableName, preData, others);
+  const acRet = await basicAcs.update(tableName, preData);
   if (acRet.OK) {
     return acRet.data;
   }
@@ -85,16 +70,4 @@ exports.remove = async (tableName, id, t) => {
     return acRet.data;
   }
   throw acRet.error;
-};
-
-exports.search = async (tableName, params) => {
-  const acRet1 = await basicAcs.search(tableName, params);
-
-  if (!acRet1.OK) {
-    throw acRet1.error;
-  }
-
-  return {
-    rows: acRet1.data,
-  };
 };

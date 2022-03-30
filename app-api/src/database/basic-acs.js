@@ -9,29 +9,9 @@ const sqlStr = require("./sql-str");
 const { parse2Str } = require("../utils/date");
 const { v4: uuid } = require("uuid");
 
-exports.allRecords = async (tableName, { orderBy }) => {
+exports.getAll = async (tableName) => {
   try {
-    const sql = sqlStr.genSqlAllRecords({
-      tableName,
-      orderBy,
-    });
-    const ret = await db.query(sql, { type: QueryTypes.SELECT });
-
-    return createResult(ret);
-  } catch (ex) {
-    return createResult(null, ex);
-  }
-};
-
-exports.getAll = async (tableName, { page = 1, pageSize = 20, orderBy }) => {
-  try {
-    const { limit, offset } = createPaginate(page, pageSize);
-    const sql = sqlStr.genSqlAll({
-      tableName,
-      limit,
-      offset,
-      orderBy,
-    });
+    const sql = sqlStr.genSqlAll({ tableName });
     const ret = await db.query(sql, { type: QueryTypes.SELECT });
 
     return createResult(ret);
@@ -67,15 +47,13 @@ exports.detail = async (tableName, params) => {
   }
 };
 
-exports.insert = async (tableName, { columns, rows }, others, t) => {
+exports.insert = async (tableName, { columns, rows }) => {
   try {
-    // const created_date = parse2Str();
     let rowsSafe = Array.isArray(rows) ? rows : [rows];
     rowsSafe = rowsSafe.map((r) => {
       return {
         ...r,
         id: uuid(),
-        // created_date,
       };
     });
 
@@ -84,7 +62,8 @@ exports.insert = async (tableName, { columns, rows }, others, t) => {
       columns,
       rows: rowsSafe,
     });
-    const ret = await db.query(sql, { type: QueryTypes.SELECT, transaction: t });
+
+    const ret = await db.query(sql, { type: QueryTypes.INSERT });
 
     return createResult(ret);
   } catch (ex) {
@@ -92,7 +71,7 @@ exports.insert = async (tableName, { columns, rows }, others, t) => {
   }
 };
 
-exports.update = async (tableName, params, { auth } = {}, t) => {
+exports.update = async (tableName, params) => {
   try {
     const dataSafe = Array.isArray(params) ? params : [params];
     const sql = dataSafe.map(({ row }) => {
@@ -104,7 +83,7 @@ exports.update = async (tableName, params, { auth } = {}, t) => {
         row: data,
       });
     }).join(';');
-    const many = await db.query(sql, { type: QueryTypes.SELECT, transaction: t });
+    const many = await db.query(sql, { type: QueryTypes.UPDATE });
 
     return createResult(many);
   } catch (ex) {
@@ -121,28 +100,6 @@ exports.remove = async (tableName, { id }, t) => {
     await db.query(sql, { type: QueryTypes.DELETE, transaction: t });
 
     return createResult({ id });
-  } catch (ex) {
-    return createResult(null, ex);
-  }
-};
-
-exports.search = async (tableName, params) => {
-  try {
-    const { pagination = {}, where, where2, orderBy } = params;
-    const { page = 1, pageSize = 20 } = pagination
-    const { limit, offset } = createPaginate(page, pageSize);
-
-    const sql = sqlStr.genSqlSearch({
-      tableName,
-      limit,
-      offset,
-      orderBy,
-      where,
-      where2
-    });
-    const ret = await db.query(sql, { type: QueryTypes.SELECT });
-
-    return createResult(ret);
   } catch (ex) {
     return createResult(null, ex);
   }

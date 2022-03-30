@@ -1,11 +1,11 @@
 const { Sequelize, QueryTypes } = require("sequelize");
 
 const config = {
-  username: "sa",
-  password: "1",
-  database: "APP_TEST",
+  username: "root",
+  password: "123456",
+  database: "app_test",
   host: "127.0.0.1",
-  dialect: "mssql",
+  dialect: "mysql",
   logging: false,
   timezone: "+07:00",
   underscored: true,
