@@ -91,7 +91,7 @@ async function searchName(params) {
     const sql = `
     SELECT *
     FROM [users]
-    WHERE name like '%${prs[0].name}%'
+    WHERE name like '%${prs[0].name}%' AND role_name <> 'ADMIN'
     ORDER BY name
   `;
     const ret = await db.query(sql, { type: QueryTypes.SELECT });
