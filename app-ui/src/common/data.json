@@ -1,0 +1,53 @@
+{
+  "student": [
+    {
+      "id": 1,
+      "name": "Nguyen Van A",
+      "toan": 7,
+      "ly": 8,
+      "hoa": 6
+    },
+    {
+      "id": 2,
+      "name": "Tran Van B",
+      "toan": 5,
+      "ly": 8,
+      "hoa": 7
+    },
+    {
+      "id": 3,
+      "name": "Le Thanh C",
+      "toan": 5,
+      "ly": 8,
+      "hoa": 7
+    },
+    {
+      "id": 4,
+      "name": "Ly Van D",
+      "toan": 5,
+      "ly": 8,
+      "hoa": 7
+    },
+    {
+      "id": 5,
+      "name": "Tran Thi E",
+      "toan": 5,
+      "ly": 8,
+      "hoa": 7
+    },
+    {
+      "id": 6,
+      "name": "Le Thi F",
+      "toan": 9,
+      "ly": 6,
+      "hoa": 4
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ]
+}

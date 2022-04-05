@@ -10,6 +10,7 @@ import LoginIcon from '@material-ui/icons/PeopleAltOutlined';
 import RegisterView from '../views/Register';
 import UserProfileView from '../views/UserProfile';
 import UserManagerView from '../views/UserManager';
+import HomeView from '../views/Home';
 
 const RoutesType = {
     New: "new",
@@ -17,7 +18,8 @@ const RoutesType = {
 }
 
 export const RouteNames = {
-    Dashboard: '',
+    Home: '',
+    Dashboard: 'Dashboard',
     Login: 'Login',
     Register: 'Register',
     UserProfile: 'UserProfile',
@@ -30,6 +32,7 @@ export const AllRouteNames = {
 }
 
 export const RoutePaths = {
+    Home: ['', RouteNames.Home].join('/'),
     Dashboard: ['', RouteNames.Dashboard].join('/'),
     Login: ['', RouteNames.Login].join('/'),
     Register: ['', RouteNames.Register].join('/'),
@@ -41,6 +44,14 @@ export const RoutePaths = {
 // route
 
 export const RoutesApp = {
+    Home: {
+        exact: true,
+        id: RouteNames.Home,
+        label: "Home",
+        path: RoutePaths.Home,
+        component: HomeView,
+        icon: DashboardIcon
+    },
     Dashboard: {
         exact: true,
         id: RouteNames.Dashboard,
@@ -92,6 +103,14 @@ export const RoutesApp = {
 }
 
 export const ManagerRoute = {
+    Home: {
+        exact: true,
+        id: RouteNames.Home,
+        label: "Home",
+        path: RoutePaths.Home,
+        component: HomeView,
+        icon: DashboardIcon
+    },
     Login: {
         exact: true,
         id: RouteNames.Login,
@@ -135,6 +154,14 @@ export const ManagerRoute = {
 }
 
 export const RegisterRoute = {
+    Home: {
+        exact: true,
+        id: RouteNames.Home,
+        label: "Home",
+        path: RoutePaths.Home,
+        component: HomeView,
+        icon: DashboardIcon
+    },
     Login: {
         exact: true,
         id: RouteNames.Login,
@@ -162,6 +189,14 @@ export const RegisterRoute = {
 }
 
 export const GuestRoute = {
+    Home: {
+        exact: true,
+        id: RouteNames.Home,
+        label: "Home",
+        path: RoutePaths.Home,
+        component: HomeView,
+        icon: DashboardIcon
+    },
     Login: {
         exact: true,
         id: RouteNames.Login,

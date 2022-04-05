@@ -82,7 +82,7 @@ export default function ({ classes, open, setOpen, mainRef }) {
             return (
                 <div className="block-left">
                     <Button>
-                        <Typography variant="h5" noWrap className="logo-text">
+                        <Typography variant="h5" noWrap className="logo-text" onClick={() => handleView(RoutePaths.Home)}>
                             USER HOME
                         </Typography>
                     </Button>

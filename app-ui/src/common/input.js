@@ -37,3 +37,25 @@ export const FIELDS_UPDATE_USER = [
         label: 'Tên người dùng',
     },
 ]
+
+export const FIELDS_STUDENT = [
+    {
+        id: 'name',
+        label: 'Tên người dùng',
+    },
+    {
+        id: 'toan',
+        label: 'Điểm toán',
+        type: 'number'
+    },
+    {
+        id: 'ly',
+        label: 'Điểm lý',
+        type: 'number'
+    },
+    {
+        id: 'hoa',
+        label: 'Điểm hóa',
+        type: 'number'
+    },
+]
