@@ -1,0 +1,112 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "student": [
+    {
+      "id": 1,
+      "name": "Trần Thị La",
+      "toan": 7,
+      "ly": 8,
+      "hoa": 10
+    },
+    {
+      "id": 2,
+      "name": "Bùi Văn Tuấn",
+      "toan": 5,
+      "ly": 2,
+      "hoa": 3
+    },
+    {
+      "id": 3,
+      "name": "Đinh Văn Tư",
+      "toan": 3,
+      "ly": 5,
+      "hoa": 5
+    },
+    {
+      "id": 4,
+      "name": "Trần Tuấn Anh",
+      "toan": 8,
+      "ly": 5,
+      "hoa": 9
+    },
+    {
+      "id": 5,
+      "name": "Nguyễn Gia Đạt",
+      "toan": 9,
+      "ly": 6,
+      "hoa": 6
+    },
+    {
+      "id": 6,
+      "name": "Lê Văn Bảy",
+      "toan": 7,
+      "ly": 9,
+      "hoa": 4
+    },
+    {
+      "id": 7,
+      "name": "Bùi Thị Ngọc Trinh",
+      "toan": 7,
+      "ly": 8,
+      "hoa": 10
+    },
+    {
+      "id": 8,
+      "name": "Lê Thị Nở",
+      "toan": 5,
+      "ly": 2,
+      "hoa": 3
+    },
+    {
+      "id": 9,
+      "name": "Trần Anh Du",
+      "toan": 3,
+      "ly": 5,
+      "hoa": 5
+    },
+    {
+      "id": 10,
+      "name": "Nguyễn Thành Nam",
+      "toan": 8,
+      "ly": 5,
+      "hoa": 9
+    },
+    {
+      "id": 11,
+      "name": "Đinh Thị Sáu",
+      "toan": 9,
+      "ly": 6,
+      "hoa": 6
+    },
+    {
+      "id": 12,
+      "name": "Nguyễn Võ Huy Hoàng",
+      "toan": 7,
+      "ly": 9,
+      "hoa": 4
+    },
+    {
+      "name": "Bùi Thị Thúy Nhàn",
+      "toan": "6",
+      "ly": "8",
+      "hoa": "5",
+      "id": 13
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
