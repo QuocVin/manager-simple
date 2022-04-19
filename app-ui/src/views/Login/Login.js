@@ -117,7 +117,7 @@ export default function Login() {
                             Đăng nhâp
                         </Button>
                         <Grid container>
-                            <Grid item>
+                            <Grid item xs={12}>
                                 <Link href="/Register" variant="body2">
                                     {"Bạn chưa có tài khoản? Đăng ký"}
                                 </Link>

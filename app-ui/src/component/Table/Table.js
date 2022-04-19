@@ -35,7 +35,7 @@ export default function AppTable({ columns, data, handleChoose }) {
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
-                                    key={column.id + 'tableh'}
+                                    key={column.id + 'table-header'}
                                     align={column.align}
                                     style={{ minWidth: column.minWidth }}
                                 >
@@ -45,13 +45,13 @@ export default function AppTable({ columns, data, handleChoose }) {
                         </TableRow>
                     </TableHead>
                     <TableBody >
-                        {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, idx) => {
                             return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                <TableRow hover role="checkbox" tabIndex={-1} key={idx + '-codeRow'}>
                                     {columns.map((column) => {
                                         const value = row[column.id];
                                         return (
-                                            <TableCell key={column.id + 'tableb'} align={column.align} onClick={() => handleChoose(row.userId)}>
+                                            <TableCell key={column.id + 'table-body'} align={column.align} onClick={() => handleChoose(row.userId)}>
                                                 {column.format && typeof value === 'number' ? column.format(value) : value}
                                             </TableCell>
                                         );

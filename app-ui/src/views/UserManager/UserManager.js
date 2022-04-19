@@ -9,7 +9,7 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import { useStyles } from "./UserManager-styles";
 import { useHistory } from 'react-router';
-import { endpoints, API, ROLE, UsersColumns } from '../../common';
+import { endpoints, API, ROLE, UsersColumns2 } from '../../common';
 import AppTable from '../../component/Table';
 import moment from 'moment';
 import { RoutesApp } from '../../routes/route'
@@ -121,7 +121,7 @@ export default function UserManager() {
             </Grid>
 
             {loading ? <p>Loading ...</p> :
-                <AppTable columns={UsersColumns} data={userList} handleChoose={handleChooseUser} />
+                <AppTable columns={UsersColumns2} data={userList} handleChoose={handleChooseUser} />
             }
         </Container>
     );
